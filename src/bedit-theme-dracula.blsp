@@ -1,0 +1,38 @@
+(defmodule bedit-theme-dracula
+  "The Dracula theme for bedit, as a plugin contribution. This module is PURE DATA:
+it names no editor code and takes no dependency on the bedit app — it only exports
+`(bedit-plugin)`, the contribution map the host reads and interprets. That data-not-a-call
+contract is what lets a package `:enhances bedit` without depending on it (which would be
+circular): the plugin says *what* it offers, bedit decides *how* to apply it.
+
+The palette is the 16 semantic roles bedit's `theme/theme-apply!` rebinds — the same
+`role -> \"#rrggbb\"` shape as the bundled themes in `bedit`'s `src/themes.blsp`.")
+;; ---- the palette (Dracula — https://draculatheme.com) -----------------------
+;; The classic Dracula 16: a soft-dark background, high-contrast foreground, and the
+;; signature purple/pink/cyan accents, mapped onto bedit's semantic role names.
+(def *dracula*
+  {:base "#282a36"       ; the editor background
+   :mantle "#21222c"     ; a step darker — recessed chrome (inactive mode line)
+   :surface0 "#343746"   ; raised chrome: the mode-line bar, popup cards
+   :surface1 "#44475a"   ; borders + the current-line band (Dracula "current line")
+   :surface2 "#565f89"   ; the selection background
+   :overlay0 "#6272a4"   ; dim furniture: line numbers, the scrollbar track (Dracula comment)
+   :overlay1 "#7b88b8"   ; the scrollbar thumb
+   :text "#f8f8f2"       ; the default foreground
+   :subtext "#c9cbe0"    ; secondary text (an inactive mode line)
+   :blue "#8be9fd"       ; the accent (the selected completion row) — Dracula cyan
+   :mauve "#bd93f9"      ; Dracula purple
+   :green "#50fa7b"
+   :yellow "#f1fa8c"
+   :peach "#ffb86c"      ; Dracula orange
+   :red "#ff5555"        ; errors (an unmatched bracket)
+   :teal "#79dafa"})     ; the matched bracket pair — a lighter cyan
+;; ---- the contribution -------------------------------------------------------
+
+(defn bedit-plugin ()
+  "This package's contribution to its host, as a map of contribution-kind -> data.
+bedit reads `:themes` — a vector of `{:name :palette}` entries — and registers each
+into `M-x theme-select` (font/size default to the editor's bundled face). The map is
+open: future kinds (`:keymaps`, `:modes`, …) slot in beside `:themes` without changing
+the discovery/loading path."
+  {:themes [{:name "Dracula" :palette *dracula*}]})
