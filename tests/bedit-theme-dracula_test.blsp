@@ -1,0 +1,42 @@
+;; The contribution contract — what bedit reads off this plugin. Pure and
+;; standalone (no bedit dependency): `(bedit-plugin)` must return a `:themes`
+;; vector of `{:name :palette}` entries, each palette covering bedit's 16 semantic
+;; role names with `"#rrggbb"` hex strings. If bedit adds a role, this test is
+;; where the plugin notices it's now incomplete.
+
+(defmodule bedit-theme-dracula-test
+  (:use test)
+  (:use bedit-theme-dracula))
+
+;; The 16 roles bedit's `theme/theme-apply!` rebinds — the palette must define each.
+(def *roles*
+  [:base :mantle :surface0 :surface1 :surface2 :overlay0 :overlay1
+    :text :subtext :blue :mauve :green :yellow :peach :red :teal])
+
+(defn hex6? (s)
+  "A `\"#rrggbb\"` string: a leading `#` and six hex digits."
+  (and (string? s)
+    (= (count s) 7)
+    (= (char-at s 0) "#")
+    (every? (fn (i) (>= (index-of "0123456789abcdefABCDEF" (char-at s i)) 0))
+      (range 1 7))))
+
+(describe "bedit-plugin — the contribution map"
+  (test "offers a non-empty :themes vector"
+    (let (themes (:themes (bedit-plugin)))
+      (is (vector? themes))
+      (is (> (count themes) 0))))
+
+  (test "every theme has a string :name and a map :palette"
+    (doseq (theme (:themes (bedit-plugin)))
+      (is (string? (:name theme)))
+      (is (map? (:palette theme)))))
+
+  (test "includes the Dracula theme"
+    (is (includes? (map :name (:themes (bedit-plugin))) "Dracula"))))
+
+(describe "the palette covers bedit's 16 roles with hex colours"
+  (doseq (theme (:themes (bedit-plugin)))
+    (test (str (:name theme) ": every role present and a valid hex colour")
+      (doseq (role *roles*)
+        (is (hex6? (get (:palette theme) role)))))))
