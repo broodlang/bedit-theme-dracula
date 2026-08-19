@@ -17,8 +17,8 @@
   "A `\"#rrggbb\"` string: a leading `#` and six hex digits."
   (and (string? s)
     (= (count s) 7)
-    (= (char-at s 0) "#")
-    (every? (fn (i) (>= (index-of "0123456789abcdefABCDEF" (char-at s i)) 0))
+    (= (string/char-at s 0) "#")
+    (every? (fn (i) (>= (index-of "0123456789abcdefABCDEF" (string/char-at s i)) 0))
       (range 1 7))))
 
 (describe "bedit-plugin — the contribution map"
