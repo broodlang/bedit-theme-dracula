@@ -10,8 +10,9 @@
 
 ;; The 16 roles bedit's `theme/theme-apply!` rebinds — the palette must define each.
 (def *roles*
-  [:base :mantle :surface0 :surface1 :surface2 :overlay0 :overlay1
-    :text :subtext :blue :mauve :green :yellow :peach :red :teal])
+  [:base
+    :mantle :surface0 :surface1 :surface2 :overlay0 :overlay1 :text :subtext :blue :mauve
+    :green :yellow :peach :red :teal])
 
 (defn hex6? (s)
   "A `\"#rrggbb\"` string: a leading `#` and six hex digits."
