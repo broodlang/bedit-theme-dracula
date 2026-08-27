@@ -16,7 +16,7 @@ packages on startup and folds each one's `:themes` into `M-x theme-select`.
 In a bedit checkout:
 
 ```bash
-nest add bedit-theme-dracula :version "^0.2"
+nest add bedit-theme-dracula :version "^0.3"
 ```
 
 Reopen the editor — **Dracula** appears in `M-x theme-select`, registered on
