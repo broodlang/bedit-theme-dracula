@@ -1,19 +1,18 @@
 ;; bedit-theme-dracula — a Dracula colour theme for the bedit editor, as a hive
-;; PLUGIN package. It declares `:enhances {bedit ">= 0.3"}` (Debian's `Enhances:`
+;; PLUGIN package. It declares `:enhances {bedit ">= 0.4"}` (Debian's `Enhances:`
 ;; — "I add functionality to bedit", checked by the host, never a hard dependency)
 ;; and ships pure data: an entry module exposing `(bedit-plugin)`, the contribution
 ;; map bedit folds into its theme picker. No `:dependencies` — a theme plugin never
 ;; touches the editor's code, only contributes a palette, so it stays a leaf.
 ;;
 ;; Publish:  nest publish
-;; Use:      in a bedit checkout, `nest add bedit-theme-dracula :version "^0.2"`
+;; Use:      in a bedit checkout, `nest add bedit-theme-dracula :version "^0.3"`
 ;;           then reopen the editor — "Dracula" appears in `M-x theme-select`.
 (project
   :name "bedit-theme-dracula"
-  :version "0.2.0"
-  :brood ">= 0.13.0"
+  :version "0.3.0"
   :description
     "A Dracula colour theme for the bedit editor — a plugin package (:enhances bedit). Pure data: a 16-role palette the host folds into M-x theme-select."
   :repository "https://github.com/broodlang/bedit-theme-dracula"
-  :enhances {bedit ">= 0.3"}
+  :enhances {bedit ">= 0.4"}
   :source-paths ["src"])
