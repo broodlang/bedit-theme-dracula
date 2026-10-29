@@ -28,7 +28,7 @@ A theme plugin never calls into bedit — it only *describes* what it offers, an
 the host decides how to apply it. That's what lets it `:enhances bedit` without
 depending on it (which would be circular):
 
-```brood
+```brood fragment
 (defn bedit-plugin ()
   {:themes [{:name "Dracula" :palette { … 16 role → "#rrggbb" … }}]})
 ```
