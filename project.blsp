@@ -10,7 +10,7 @@
 ;;           then reopen the editor — "Dracula" appears in `M-x theme-select`.
 (project
   :name "bedit-theme-dracula"
-  :version "0.3.8"
+  :version "0.3.9"
   :brood ">= 0.56.0"
   :description
     "A Dracula colour theme for the bedit editor — a plugin package (:enhances bedit). Pure data: a 16-role palette the host folds into M-x theme-select."
